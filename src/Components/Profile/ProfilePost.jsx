@@ -1,7 +1,18 @@
-import { Avatar, Box, Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react"
+import { 
+  Avatar, Box, Divider,
+  Flex, GridItem, Image, Modal,
+  ModalBody, ModalCloseButton,
+  ModalContent, ModalOverlay,
+  Text, VStack, useDisclosure
+} from "@chakra-ui/react"
+
+import Comment from "../Comments/Comment";
+import PostFooter from "../FeedPosts/PostFooter";
+// icons 
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment } from 'react-icons/fa';
 import { MdDelete  } from 'react-icons/md';
+
 function ProfilePost({img}) {
 
   const { isOpen,onOpen,onClose } = useDisclosure();
@@ -83,6 +94,72 @@ function ProfilePost({img}) {
           <MdDelete size={20} cursor={"pointer"}/>
         </Box>
         </Flex>
+        <Divider my={4} bg={"gray.500"} />
+        <VStack w={"full"}  alignItems={"start"} maxH={"350px"} overflowY={"auto"}>
+          <Comment
+          createdAt="1d ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random text 1t ...."}
+          />
+          <Comment
+          createdAt="12h ago"
+          username="Rohit2"
+          profilePic="/profilepic.png"
+          text={"random textt 2...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+          <Comment
+          createdAt="3h ago"
+          username="Rohit"
+          profilePic="/profilepic.png"
+          text={"random textt 3...."}
+          />
+
+        </VStack>
+        <Divider my={4}bg={"gray.800"}/>
+        <PostFooter isProfilePage={true}/>
         </Flex>
         </Flex>
         </ModalBody>

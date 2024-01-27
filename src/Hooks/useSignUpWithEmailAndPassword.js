@@ -1,6 +1,7 @@
 
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '../Firebase/firebase'
+import { auth ,Firestore} from '../Firebase/firebase'
+import { doc, setDoc } from 'firebase/firestore';
 const useSignUpWithEmailAndPassword = () => {
 const [
     CreateUserWithEmailAndPassword,
@@ -8,7 +9,7 @@ const [
     loading,
     error,
     ] = useCreateUserWithEmailAndPassword(auth);
-    const signup =async({inputs}) =>{
+    const signup =async(inputs) =>{
         
         if(!inputs.email || !inputs.password || !inputs.username ||!inputs.fullName){
             console.log("Please fill all the fields")
@@ -36,6 +37,8 @@ const [
                     posts:[],
                     createdAt:Date.now(),
                 }
+                await setDoc(doc(Firestore,"users",newUser.user.uid),userDoc);
+                localStorage.setItem("user-info",JSON.stringify(userDoc));
             }
         }catch(error){
             console.log(error);

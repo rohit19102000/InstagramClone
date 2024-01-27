@@ -50,7 +50,7 @@ return (
 </Box>
 <Box onClick={() => setIsLogIn(!isLogIn)} color={"blue.500"} cursor={"pointer"}>
 
-{isLogIn? "Log in":"Sign up"}
+{isLogIn? "Sign up":"log in"}
 
 </Box>
 </Flex>

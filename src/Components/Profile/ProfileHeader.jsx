@@ -5,7 +5,7 @@ function ProfileHeader() {
   return (
     <Flex gap={{base:4,sm:10}} py={10} direction={{base:"column",sm:"row"}}>
    <AvatarGroup
-   size={{base:"xld",md:"2xl"}}
+   size={{base:"xl",md:"2xl"}}
    justifySelf={"center"}
    alignSelf={"flex-start"}
    mx={"auto"}

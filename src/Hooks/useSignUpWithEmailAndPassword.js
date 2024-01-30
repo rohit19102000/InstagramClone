@@ -1,6 +1,6 @@
 
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth ,Firestore} from '../Firebase/firebase'
+import { auth ,firestore} from '../Firebase/firebase'
 import {collection, doc,getDocs,setDoc,where ,query} from 'firebase/firestore';
 import useShowToast from './useShowToast';
 import useAuthStore from '../Store/authStore'
@@ -17,11 +17,12 @@ const signup =async(inputs) =>{
             return;
         }
 
-        const usersRef = collection(Firestore,'users');
+        const usersRef = collection(firestore,'users');
         const q =query(usersRef,where("username","==",inputs.username));
         const querySnapshot = await getDocs(q)
+       
         if(!querySnapshot.empty){
-            showToast("Error","username already exists","error");
+            showToast("Error","User already exists","error");
             return;
         }
         
@@ -47,7 +48,7 @@ const signup =async(inputs) =>{
                     posts:[],
                     createdAt:Date.now(),
                 }
-                await setDoc(doc(Firestore,"users",newUser.user.uid),userDoc);
+                await setDoc(doc(firestore,"users",newUser.user.uid),userDoc);
                 localStorage.setItem("user-info",JSON.stringify(userDoc));
                 loginUser(userDoc);
             }

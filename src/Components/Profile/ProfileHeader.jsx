@@ -1,7 +1,9 @@
 import { Avatar, AvatarGroup, Button, Flex, Text, VStack } from "@chakra-ui/react"
+import useUserProfileStore from "../../Store/userProfileStore"
 
 
 function ProfileHeader() {
+  const {userProfile} =useUserProfileStore();
   return (
     <Flex gap={{base:4,sm:10}} py={10} direction={{base:"column",sm:"row"}}>
    <AvatarGroup
@@ -10,7 +12,7 @@ function ProfileHeader() {
    alignSelf={"flex-start"}
    mx={"auto"}
    >
-    <Avatar name="user profile" src='/profilepic.png' alt='profile pic'/>
+    <Avatar  src={userProfile.profilePicUrl} alt='profile pic'/>
 
    </AvatarGroup>
 
@@ -22,7 +24,7 @@ function ProfileHeader() {
     w={"full"}
  
  >
-  <Text fontSize={{base:"sm",md:"lg"}}> username</Text>
+  <Text fontSize={{base:"sm",md:"lg"}}> {userProfile.username}</Text>
   <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
 
     <Button bg={"white"} color={"black"} _hover={{bg:"whiteAlpha.800"}} size={{base:"xs",md:"sm"}}>
@@ -33,22 +35,22 @@ function ProfileHeader() {
     </Flex>
     <Flex alignItems={"center"} gap={{base:2,sm:4}}>
       <Text fontSize={{base:"xs",md:"sm"}}>
-        <Text as="span" fontWeight={"bold"} mr={1}>4</Text>
+        <Text as="span" fontWeight={"bold"} mr={1}>{userProfile.posts.length}</Text>
         Posts
       </Text>
       <Text fontSize={{base:"xs",md:"sm"}}>
-        <Text as="span" fontWeight={"bold"} mr={1}>14</Text>
+        <Text as="span" fontWeight={"bold"} mr={1}>{userProfile.followers.length}</Text>
         followers
       </Text>
       <Text fontSize={{base:"xs",md:"sm"}}>
-        <Text as="span" fontWeight={"bold"} mr={1}>170</Text>
+        <Text as="span" fontWeight={"bold"} mr={1}>{userProfile.following.length}</Text>
         following
       </Text>
     </Flex>
     <Flex alignItems={"center"} gap={4}>
-        <Text fontSize={"sm"} fontWeight={"bold"}> user</Text>
+        <Text fontSize={"sm"} fontWeight={"bold"}> {userProfile.fullName}</Text>
     </Flex>
-        <Text fontSize={"sm"}>user bio </Text>
+        <Text fontSize={"sm"}>{userProfile.bio} </Text>
     
    </VStack>
     </Flex>

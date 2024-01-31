@@ -3,7 +3,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth"
 import { auth, firestore } from "../../Firebase/firebase"
 import  useShowToast  from "../../Hooks/useShowToast"
 import useAuthStore  from "../../Store/authStore"
-import { doc, setDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc } from "firebase/firestore"
 
 function GoogleAuth({prefix}) {
 
@@ -21,8 +21,17 @@ function GoogleAuth({prefix}) {
           showToast("Error",error.message,"error");
           return ;
         }
+        const userRef = doc(firestore,"users",newUser.user.uid);
+        const userSnap = await getDoc(userRef);
 
-        if(newUser){
+        if(userSnap.exists()){
+          // login user
+          const userDoc = userSnap.data();
+          localStorage.setItem("user-info",JSON.stringify(userDoc));
+          loginUser(userDoc);
+         }else{
+        
+          // sign up user
           const userDoc = {
           uid:newUser.user.uid,
           email: newUser.user.email,
@@ -34,11 +43,12 @@ function GoogleAuth({prefix}) {
           following:[],
           posts:[],
           createdAt:Date.now(),
-        };
-        await setDoc(doc(firestore,"users",newUser.user.uid),userDoc);
-        localStorage.setItem("user-info",JSON.stringify(userDoc));
-        loginUser(userDoc);
-    }
+          };
+          await setDoc(doc(firestore,"users",newUser.user.uid),userDoc);
+          localStorage.setItem("user-info",JSON.stringify(userDoc));
+          loginUser(userDoc);
+          
+         }
       }catch(error){
         showToast("Error",error.message,"error");
 
@@ -55,3 +65,7 @@ function GoogleAuth({prefix}) {
 }
 
 export default GoogleAuth
+
+
+
+

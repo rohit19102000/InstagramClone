@@ -11,6 +11,7 @@ const {userProfile,setUserProfile} =  useUserProfileStore()
 
 useEffect(() => {
     const getUserProfile = async() =>{
+
         setIsLoading(true);
         try{
             const q = query(collection(firestore,"users"),where("username","==",username))
@@ -23,7 +24,7 @@ useEffect(() => {
 
            });
            setUserProfile(userDoc);
-           console.log(userDoc)
+        //    console.log(userDoc)
         }catch(error){
             showToast("Error",error.message,"error");
         }finally{

@@ -9,7 +9,8 @@ import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 const useFollowUser = (userId) => {
  const [isUpdating,setIsUpdating] = useState(false);
  const [isFollowing,setIsFollowing] = useState(false);
-const { authUser,setAuthUser }  =useAuthStore();
+ const authUser = useAuthStore((state) => state.user);
+ const setAuthUser = useAuthStore((state) => state.setUser);
 const { userProfile,setUserProfile } = useUserProfileStore();
 const showToast = useShowToast();
 
@@ -29,11 +30,39 @@ const handleFollowUser = async () =>{
 
         if(isFollowing) {
             // follow
+            setAuthUser({
+                ...authUser,
+                following:authUser.following.filter(uid =>uid !== userId)
+
+            })
+            setUserProfile({
+                ...userProfile,
+                followers:userProfile.followers.filter(uid => uid !== authUser.uid)
+            })
 
 
+            localStorage.setItem('user-info',JSON.stringify({
+                ...authUser,
+                following:authUser.following.filter(uid => uid !== userId)
+            }))
+            setIsFollowing(false);
+       
         }else{
             // unFollow
-            
+            setAuthUser({
+                ...authUser,
+                following:[...authUser.following,userId]
+            });
+            setUserProfile({
+                ...userProfile,
+                followers:[...userProfile.followers,authUser.uid]
+            })
+            localStorage.setItem('user-info', JSON.stringify({
+                ...authUser,
+                following:[...authUser.following,userId]
+        
+            }));
+            setIsFollowing(true)
         }
     }catch(error){
         showToast("Error",error.message,"error");

@@ -1,37 +1,13 @@
-import { Avatar, Box, Button, Flex,Link, Tooltip } from "@chakra-ui/react"
+import {  Box, Button, Flex,Link, Tooltip } from "@chakra-ui/react"
 import {  Link as RouterLink  } from "react-router-dom"
-import { CreatePostLogo, InstagramLogo, InstagramMobileLogo, NotificationsLogo, SearchLogo} from '../../assets/constants'
-import { AiFillHome  } from 'react-icons/ai';
+import {  InstagramLogo, InstagramMobileLogo } from '../../assets/constants'
+
 import { BiLogOut } from 'react-icons/bi';
 import useLogout from "../../Hooks/useLogout";
+import SidebarItems from "./SidebarItems";
 
 function Sidebar() {
-const sidebarItems =[
-    {
-        icon:<AiFillHome size={25}/>,
-        text:"home",
-        link:"/",
-    },
-    {
-        icon:<SearchLogo size={25}/>,
-        text:"Search",
-        
-    },
-    {
-        icon: <NotificationsLogo size={25}/>,
-        text:"notifications",
-        
-    },
-    {
-        icon:<CreatePostLogo  size={25}/>,
-        text:"Create",
-    },
-    {
-        icon:<Avatar size={"sm"} name="Rukra Orkmez" src='/profilepic.png'/>,
-        text:"profile",
-        link:"asaprogrammer"
-    },
-];
+
 const {handleLogout,isLoggingOut} = useLogout()
 
 
@@ -63,39 +39,7 @@ const {handleLogout,isLoggingOut} = useLogout()
     </Link>
 
     <Flex direction={"column"} gap={5} cursor={"pointer"}>
-        {sidebarItems.map((item,index)=>(
-            <Tooltip
-            key={index}
-             hasArrow
-            label={item.text} 
-                placement="right"
-                ml={1}
-                openDelay={500}
-                display={{base:"block",md:"none"}}
-            >
-                <Link 
-                display={"flex"}
-                to={item.link || null}
-                as={RouterLink} 
-                alignItems={"center"}
-
-                gap={4} 
-                _hover={{bg:"whiteAlpha.400"}} 
-                borderRadius={6}
-                 p={2}
-                  w={{base:10,md:"full"}} 
-                  justifyContent={{base:"center",md:"flex-start"}}
-                >
-                {item.icon}
-                <Box display={{base:"none",md:"block"}}>
-                    {item.text}
-                </Box>
-                </Link>
-
-
-
-            </Tooltip >
-        ))}
+        <SidebarItems/>
     </Flex>
     {/*  Log out  */}
     <Tooltip

@@ -15,8 +15,11 @@ import {
 	ModalOverlay,
 	Stack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useAuthStore from "../../Store/authStore";
+import usePreviewImg from "../../Hooks/usePreviewImg";
+import useEditProfile from "../../Hooks/useEditProfile";
+import useShowToast from "../../Hooks/useShowToast";
 
 const EditProfile = ({ isOpen, onClose }) => {
 	const [inputs,setInputs]= useState({
@@ -26,9 +29,25 @@ const EditProfile = ({ isOpen, onClose }) => {
 		})
 
 const authUser = useAuthStore((state) => state.user);
-const handleEditProfile= ()=>{
-	console.log(inputs);
+const fileRef = useRef(null);
+const {handleImageChange,selectedFile,setSelectedFile}= usePreviewImg()
+const {isUpdating,editProfile} = useEditProfile()
+const showToast = useShowToast();
+
+
+const handleEditProfile= async()=>{
+try{
+
+	await editProfile(inputs,selectedFile);
+	setSelectedFile(null)
+	onClose();
+
+}catch(error){
+
+	showToast("Error",error.message,"error");
+ }
 }
+
 
 	return (
 	
@@ -47,10 +66,11 @@ const handleEditProfile= ()=>{
 								<FormControl>
 									<Stack direction={["column", "row"]} spacing={6}>
 										<Center>
-											<Avatar size='xl' src={""} border={"2px solid white "} />
+											<Avatar size='xl' src={selectedFile || authUser.profilePicUrl} border={"2px solid white "} />
 										</Center>
 										<Center w='full'>
-											<Button w='full'>Edit Profile Picture</Button>
+											<Button w='full' onClick={()=> fileRef.current.click()}>Edit Profile Picture</Button>
+										<Input	type="file"  hidden ref={fileRef} onChange={handleImageChange} /> 
 										</Center>
 									</Stack>
 								</FormControl>
@@ -98,6 +118,7 @@ const handleEditProfile= ()=>{
 										w='full'
 										_hover={{ bg: "blue.500" }}
 										onClick={handleEditProfile}
+										isLoading={isUpdating}
 									>
 										Submit
 									</Button>

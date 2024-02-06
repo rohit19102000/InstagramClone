@@ -8,7 +8,7 @@ function ProfileHeader() {
   const { userProfile } =useUserProfileStore();
 	const authUser = useAuthStore((state) => state.user);
   const { isOpen, onOpen, onClose } = useDisclosure();
-const { isFollowing , isUpdating , handleFollowUser } =useFollowUser(userProfile?.uid);
+const { isFollowing , isUpdating , handleFollowUser } = useFollowUser(userProfile?.uid);
 
   const visitingOwnProfilleAndAuth = authUser && authUser.username === userProfile.username;
   const visitingAnotherProfilleAndAuth = authUser && authUser.username !== userProfile.username; 

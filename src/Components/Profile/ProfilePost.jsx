@@ -20,6 +20,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { firestore, storage } from "../../Firebase/firebase";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import usePostStore from "../../Store/postStore";
+import Caption from "../Comments/Caption";
 
 const ProfilePost = ({ post })=>  {
 
@@ -145,6 +146,10 @@ const ProfilePost = ({ post })=>  {
         </Flex>
         <Divider my={4} bg={"gray.500"} />
         <VStack w={"full"}  alignItems={"start"} maxH={"350px"} overflowY={"auto"}>
+          {/* caption */}
+
+          {post.caption && <Caption post={post}/>}
+          {/* comments */}
          {post.comments.map(comment =>(
           <Comment key={comment.id} comment={comment}/>
          ))}

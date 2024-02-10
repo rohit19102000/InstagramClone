@@ -12,6 +12,7 @@ const useGetUserPosts = () => {
   
   const userProfile = useUserProfileStore((state)=>state.userProfile);
   
+  
   useEffect(()=>{
     
     const getPosts = async ()=>{
@@ -25,11 +26,11 @@ const useGetUserPosts = () => {
      const querySnapshot = await getDocs(q);
 
      const posts = []
-     querySnapshot.forEach(doc =>{
-      posts.push({...doc.data(),id:doc.id})
+     querySnapshot.forEach((doc) =>{
+      posts.push({...doc.data(), id:doc.id})
     })
     posts.sort((a,b) => b.createdAt - a.createdAt)
-    setPosts(posts)
+    setPosts(posts);
   }catch(error){
     showToast("Error",error.message,"error");
     setPosts([])

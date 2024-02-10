@@ -122,7 +122,7 @@ function useCreatePost(){
 			caption:caption,
 			likes:[],
 			comments:[],
-			createdAt:new Date(),
+			createdAt:Date.now(),
 			createdBy:authUser.uid,
 		}
 

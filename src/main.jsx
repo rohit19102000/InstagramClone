@@ -13,13 +13,15 @@ const config = {
   useSystemColorMode: false,
 }
 
-const styles ={
-  global:(props) =>({
-    body:mode("gray.100","#000")(props),
-    color:mode("gray.800","whiteAlpha.900")(props),
 
-  })
-}
+const styles = {
+	global: (props) => ({
+		body: {
+			bg: mode("gray.100", "#000")(props),
+			color: mode("gray.800", "whiteAlpha.900")(props),
+		},
+	}),
+};
 
 const theme = extendTheme({ config,styles })
 

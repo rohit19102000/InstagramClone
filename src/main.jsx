@@ -9,13 +9,24 @@ import { BrowserRouter } from 'react-router-dom'
 
 
 const styles = {
-	global: (props) => ({
-		body: {
-			bg: mode("gray.100", "#000")(props),
-			color: mode("gray.800", "whiteAlpha.900")(props),
-		},
-	}),
+  global: (props) => ({
+    body: {
+      bg: mode("gray.100", "#000")(props),
+      color: mode("gray.800", "whiteAlpha.900")(props),
+    },
+  }),
+  html: {
+    "@media (prefers-color-scheme: light)": {
+      background: "gray.100",
+      color: "gray.800",
+    },
+    "@media (prefers-color-scheme: dark)": {
+      background: "#000",
+      color: "whiteAlpha.900",
+    },
+  },
 };
+
 
 const config = {
 	initialColorMode: "dark",

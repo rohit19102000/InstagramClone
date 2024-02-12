@@ -4,25 +4,24 @@ import App from './App.jsx'
 import './index.css'
 import { extendTheme } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
 import { BrowserRouter } from 'react-router-dom'
 
 
 const styles = {
   global: (props) => ({
     body: {
-      bg: mode("gray.100", "#000")(props),
-      color: mode("gray.800", "whiteAlpha.900")(props),
+      bg: "#000", // Dark mode background color
+      color: "whiteAlpha.900", // Dark mode text color
     },
   }),
   html: {
     "@media (prefers-color-scheme: light)": {
-      background: "gray.100",
-      color: "gray.800",
+      background: "#000", // Light mode background color (same as dark mode)
+      color: "whiteAlpha.900", // Light mode text color (same as dark mode)
     },
     "@media (prefers-color-scheme: dark)": {
-      background: "#000",
-      color: "whiteAlpha.900",
+      background: "#000", // Dark mode background color
+      color: "whiteAlpha.900", // Dark mode text color
     },
   },
 };

@@ -83,12 +83,12 @@ const ProfilePost = ({ post })=>  {
         <Flex alignItems={"center"} justifyContent={"center"} gap={50}>
           <Flex>
             <AiFillHeart size="20"/>
-            <Text fontWeight={"bold"} ml={2}>7</Text>
+            <Text fontWeight={"bold"} ml={2}>{post.likes.length}</Text>
             
           </Flex>
           <Flex>
             <FaComment size="20"/>
-            <Text fontWeight={"bold"} ml={2}>7</Text>
+            <Text fontWeight={"bold"} ml={2}>{post.comments.length}</Text>
             
           </Flex>
         </Flex>

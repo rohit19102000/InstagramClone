@@ -8,12 +8,6 @@ import { mode } from '@chakra-ui/theme-tools'
 import { BrowserRouter } from 'react-router-dom'
 
 
-const config = {
-  initialColorMode: 'dark',
-  useSystemColorMode: false,
-}
-
-
 const styles = {
 	global: (props) => ({
 		body: {
@@ -21,6 +15,11 @@ const styles = {
 			color: mode("gray.800", "whiteAlpha.900")(props),
 		},
 	}),
+};
+
+const config = {
+	initialColorMode: "dark",
+	useSystemColorMode: false,
 };
 
 const theme = extendTheme({ config,styles })

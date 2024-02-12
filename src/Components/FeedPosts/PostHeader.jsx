@@ -11,7 +11,7 @@ function PostHeader({ post , creatorProfile}) {
         <Flex alignItems={"center"} gap={2}>
   {creatorProfile ? (
   <Link to={`/${creatorProfile.username}`}>
-  <Avatar src={creatorProfile.profilePicURL} alt='user profile pic' size={"sm"} />
+  <Avatar src={creatorProfile.profilePicUrl} alt='user profile pic' size={"sm"} />
   </Link>
     ) : (
   <SkeletonCircle size='10' />
